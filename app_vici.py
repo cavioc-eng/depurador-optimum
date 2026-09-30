@@ -78,7 +78,7 @@ def main_app():
             st.caption("Sin registros aún en la sesión.")
 
     st.title("Panel de Control - Depuración de Listas ViciDial")
-    st.markdown("Suba el archivo exportado desde ViciDial para procesar automáticamente el filtrado de estados no deseados.")
+    st.markdown("Suba el archivo exportado desde ViciDial para procesar automáticamente el filtrado de estados no deseados (incluyendo ventas/agendados).")
 
     uploaded_file = st.file_uploader("Seleccione el archivo de leads (CSV o TXT/Excel)", type=["csv", "txt", "xlsx", "xls"])
 
@@ -105,7 +105,8 @@ def main_app():
                 with st.expander("Ver distribución de estatus originales"):
                     st.write(df['status'].value_counts())
 
-                unwanted_statuses = ['AB', 'ADC', 'DAIR', 'D-Air', 'DNC', 'DNCL', 'DNC L', 'Do Not', 'NI', 'Wrong']
+                # Lista actualizada con los estados no deseados y las ventas (SALE)
+                unwanted_statuses = ['AB', 'ADC', 'DAIR', 'D-Air', 'DNC', 'DNCL', 'DNC L', 'Do Not', 'NI', 'Wrong', 'SALE', 'Sale', 'sale']
                 
                 df_clean = df[~df['status'].isin(unwanted_statuses)]
                 df_excluded = df[df['status'].isin(unwanted_statuses)]
