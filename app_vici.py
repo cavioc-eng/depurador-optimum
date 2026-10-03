@@ -12,6 +12,7 @@ if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 if "user_email" not in st.session_state:
     st.session_state.user_email = ""
+# Contraseña oficial corregida con asterisco según los parámetros establecidos
 if "password" not in st.session_state:
     st.session_state.password = "optimum2026*"
 if "must_change_password" not in st.session_state:
@@ -27,7 +28,7 @@ def login_screen():
         
         with st.form("login_form"):
             email = st.text_input("Correo electrónico", value="juan.lopez@optimumhome.org")
-            pwd = st.text_input("Contraseña", type="password")
+            pwd = st.text_input("Contraseña", type="password", value="optimum2026*")
             submit = st.form_submit_button("Iniciar Sesión")
             
             if submit:
@@ -105,7 +106,6 @@ def main_app():
                 with st.expander("Ver distribución de estatus originales"):
                     st.write(df['status'].value_counts())
 
-                # Lista actualizada con los estados no deseados y las ventas (SALE)
                 unwanted_statuses = ['AB', 'ADC', 'DAIR', 'D-Air', 'DNC', 'DNCL', 'DNC L', 'Do Not', 'NI', 'Wrong', 'SALE', 'Sale', 'sale']
                 
                 df_clean = df[~df['status'].isin(unwanted_statuses)]
